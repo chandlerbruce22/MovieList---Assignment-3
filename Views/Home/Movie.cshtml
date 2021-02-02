@@ -1,0 +1,54 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewBag.Title = "The Joel Hilton Film Collection";
+    ViewBag.Header = "Joel Hilton's Movies";
+}
+
+@model IEnumerable<MovieList.Models.AddMovie>
+
+
+<div>
+    <h2>Here are my favorite movies!&nbsp;&nbsp; <a asp-action="AddMovie"> Add More!</a></h2>
+
+    <table>
+        <thead>
+            <tr><th>Category</th><th>Movie Title</th><th>Year</th><th>Director</th><th>Rating</th><th>Edited</th><th>Lent To</th><th>Notes</th></tr>
+        </thead>
+
+        <tbody>
+            @foreach (MovieList.Models.AddMovie x in Model)
+            {
+
+                @if (x.MovieTitle == "Independence Day")
+                {
+                    <tr>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                    </tr>
+                }
+                else
+                {
+                    <tr>
+                        <td>@x.Category</td>
+                        <td>@x.MovieTitle</td>
+                        <td>@x.Year</td>
+                        <td>@x.Director</td>
+                        <td>@x.Rating</td>
+                        <td>@x.Edited</td>
+                        <td>@x.LentTo</td>
+                        <td>@x.Notes</td>
+                    </tr>
+                }
+
+            }
+        </tbody>
+    </table>
+</div>

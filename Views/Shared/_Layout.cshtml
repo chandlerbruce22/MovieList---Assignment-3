@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    @ViewBag.Title
+</head>
+<body>
+
+    <h1>@ViewBag.Header</h1>
+    <h3>
+        <a asp-action="Index">Home Page</a> &nbsp;&nbsp;
+        <a asp-action="Podcast">My Podcasts</a> &nbsp;&nbsp;
+        <a asp-action="Movie">My Movies</a>
+    </h3>
+
+    @RenderBody()
+
+    <br />
+    <br />
+    <footer> Hilton's Web App, Copyright 2021</footer>
+
+
+
+
+
+</body>
+</html>
