@@ -1,5 +1,5 @@
 ﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+    For
 *@
 @{
     ViewBag.Title = "The Joel Hilton Film Collection";
@@ -7,6 +7,11 @@
 }
 
 @model MovieList.Models.AddMovie
+
+@*
+    Form for adding a movie. Calls the AddMovie function in the controller. Passes needed attributes for the movie.
+    Uses the AddMovie model. Has submit and cancel buttons.
+*@
 
 <div class="container">
     <form asp-action="AddMovie" method="post">

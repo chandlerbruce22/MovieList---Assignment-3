@@ -7,6 +7,7 @@ namespace MovieList.Models
 {
     public class MoviesViewModel
     {
+        // Movies View Model used for editing a movie.
         public AddMovie MoviesModel { get; set; }
         public int ID;
     }

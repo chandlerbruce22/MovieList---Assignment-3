@@ -13,6 +13,8 @@ namespace MovieList.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
+        // Initialize the context, repository, and tempID for use later in the code.
+
         private MovieListContext _context;
 
         private IMoviesRepository _repository;
@@ -26,28 +28,29 @@ namespace MovieList.Controllers
             _context = context;
             _repository = repository;
         }
-
+        // Index View
         public IActionResult Index()
         {
             return View();
         }
-
+        // Podcast View
         public IActionResult Podcast()
         {
             return View();
         }
-
+        // List of movies view. Pass the context movies IQueryable list.
         public IActionResult Movie()
         {
             return View(_context.Movies);
         }
-
+        // Get for adding a movie. Returns the form of adding a movie
         [HttpGet]
         public IActionResult AddMovie()
         {
             return View();
         }
-
+        // Post for adding a movie. Checks to see if the form is valid with the model.
+        // Adds a new movie to context. Saves changes. Redirects to the movie list view with the new context.
         [HttpPost]
         public IActionResult AddMovie(AddMovie movie)
         {
@@ -59,10 +62,11 @@ namespace MovieList.Controllers
             }
             else
             {
+                // If model isn't valid, redirects to the list of movies with the current movie list
                 return View("Movie", _context.Movies);
             }
         }
-
+        // Edit button for each movie. Passes the movie id to the new view model. Makes a temp id.
         [HttpPost]
         public IActionResult EditMovies(int id)
         {
@@ -73,13 +77,14 @@ namespace MovieList.Controllers
                 ID = tempID
             });
         }
-
+        // Saving an edited movie. Checks to see if it's valid. 
         public IActionResult UpdateMovies(MoviesViewModel model)
         {
             if (ModelState.IsValid)
             {
+                // Create a movie variable and assign it the id of the edited movie
                 var movie = _context.Movies.Single(x => x.MovieID == tempID);
-                //Can't use shorter method to do in one line, because ID is not being changed
+                //Saves each property individually, while keeping the id the same
                 _context.Entry(movie).Property(x => x.Category).CurrentValue = model.MoviesModel.Category;
                 _context.Entry(movie).Property(x => x.MovieTitle).CurrentValue = model.MoviesModel.MovieTitle;
                 _context.Entry(movie).Property(x => x.Year).CurrentValue = model.MoviesModel.Year;
@@ -93,11 +98,12 @@ namespace MovieList.Controllers
             }
             else
             {
+                // Return to movie list view if not valid.
                 return View("Movie", _context.Movies);
             }
         }
         
-
+        // Deleting the movie. Passes the id. Removes that id and all attributes from the context. Saves changes. Redirects to movie list.
         public IActionResult DeleteMovies(int id)
         {
             _context.Remove(_context.Movies.Single(x => x.MovieID == id));

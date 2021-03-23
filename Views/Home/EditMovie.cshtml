@@ -6,7 +6,12 @@
     ViewBag.Header = "Edit a Movie for Joel's List!";
 }
 
-@model MoviesViewModel 
+@model MoviesViewModel
+
+@*
+    Form for editing a movie. Calls teh updatemovies action in the controller. Takes all the passed in parameters and uses them as placeholders. 
+    Has save and cancel buttons.
+*@
 
 <div class="container">
     <form asp-action="UpdateMovies" method="POST" class="pure-form pure-form-aligned">
@@ -76,5 +81,5 @@
 
         <button class="btn btn-primary" asp-action="Movie">Cancel</button>
     </form>
-    
+
 </div>

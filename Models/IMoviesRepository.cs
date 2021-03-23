@@ -7,6 +7,7 @@ namespace MovieList.Models
 {
     public interface IMoviesRepository
     {
+        // AddMovie Model is an Iqueryable.
         IQueryable<AddMovie> Movies { get; }
     }
 }
