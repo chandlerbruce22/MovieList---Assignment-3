@@ -10,11 +10,20 @@
 
 
 <div>
-    <h2>Here are my favorite movies!&nbsp;&nbsp; <a asp-action="AddMovie"> Add More!</a></h2>
-
-    <table>
+    <table class="table table-bordered" table-hover>
         <thead>
-            <tr><th>Category</th><th>Movie Title</th><th>Year</th><th>Director</th><th>Rating</th><th>Edited</th><th>Lent To</th><th>Notes</th></tr>
+            <tr>
+                <th>Movie</th>
+                <th>Category</th>
+                <th>Year</th>
+                <th>Director</th>
+                <th>Rating</th>
+                <th>Edited</th>
+                <th>Lent To</th>
+                <th>Notes</th>
+                <th> </th>
+                <th> </th>
+            </tr>
         </thead>
 
         <tbody>
@@ -34,17 +43,34 @@
                         <td>N/A</td>
                     </tr>
                 }
+                
                 else
                 {
                     <tr>
-                        <td>@x.Category</td>
                         <td>@x.MovieTitle</td>
+                        <td>@x.Category</td>
                         <td>@x.Year</td>
                         <td>@x.Director</td>
                         <td>@x.Rating</td>
                         <td>@x.Edited</td>
                         <td>@x.LentTo</td>
                         <td>@x.Notes</td>
+                        <td>
+                            <form id="@x.MovieID" asp-action="EditMovies" method="post">
+                                <input type="hidden" value="@x.MovieID" name="id" />
+                                <span>
+                                    <button type="submit" class="btn btn-primary">Edit</button>
+                                </span>
+                            </form>
+                        </td>
+                        <td>
+                            <form id="@x.MovieID" asp-action="DeleteMovies" method="post">
+                                <input type="hidden" value="@x.MovieID" name="id" />
+                                <span>
+                                    <button type="submit" class="btn btn-primary">Delete</button>
+                                </span>
+                            </form>
+                        </td>
                     </tr>
                 }
 

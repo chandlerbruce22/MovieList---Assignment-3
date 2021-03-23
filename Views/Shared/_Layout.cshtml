@@ -1,16 +1,21 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    @ViewBag.Title
+
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
 
-    <h1>@ViewBag.Header</h1>
+    <h1>Joel Hilton's Website</h1>
     <h3>
         <a asp-action="Index">Home Page</a> &nbsp;&nbsp;
         <a asp-action="Podcast">My Podcasts</a> &nbsp;&nbsp;
-        <a asp-action="Movie">My Movies</a>
+        <a asp-action="Movie">My Movies</a> &nbsp;&nbsp;
+        <a asp-action="AddMovie"> Add Movie</a>
     </h3>
+
 
     @RenderBody()
 

@@ -1,0 +1,80 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewBag.Title = "The Joel Hilton Film Collection";
+    ViewBag.Header = "Edit a Movie for Joel's List!";
+}
+
+@model MoviesViewModel 
+
+<div class="container">
+    <form asp-action="UpdateMovies" method="POST" class="pure-form pure-form-aligned">
+
+        <div class="form-group">
+            <input type="hidden" name="ID" value="@Model.ID" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.MoviesModel.Category">Category:</label>
+            <input class="form-control" placeholder="@Model.MoviesModel.Category" asp-for="@Model.MoviesModel.Category" type="text" />
+            <span class="text-danger" asp-validation-for="@Model.MoviesModel.Category"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.MoviesModel.MovieTitle">Title:</label>
+            <input class="form-control" placeholder="@Model.MoviesModel.MovieTitle" asp-for="@Model.MoviesModel.MovieTitle" type="text" />
+            <span class="text-danger" asp-validation-for="@Model.MoviesModel.MovieTitle"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.MoviesModel.Year">Year:</label>
+            <input class="form-control" placeholder="@Model.MoviesModel.Year" asp-for="@Model.MoviesModel.Year" type="text" />
+            <span class="text-danger" asp-validation-for="@Model.MoviesModel.Year"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.MoviesModel.Director">Director:</label>
+            <input class="form-control" placeholder="@Model.MoviesModel.Director" asp-for="@Model.MoviesModel.Director" type="text" />
+            <span class="text-danger" asp-validation-for="@Model.MoviesModel.Director"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.MoviesModel.Rating">Rating:</label>
+            <select class="form-select" asp-for="@Model.MoviesModel.Rating">
+                <option value="">Select One</option>
+                <option value="G">G</option>
+                <option value="PG">PG</option>
+                <option value="PG-13">PG-13</option>
+                <option value="R">R</option>
+            </select>
+            <span class="text-danger" asp-validation-for="@Model.MoviesModel.Rating"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.MoviesModel.Edited">Edited:</label>
+            <select asp-for="@Model.MoviesModel.Edited">
+                <option value="">Select One</option>
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.MoviesModel.LentTo">Lent To:</label>
+            <input class="form-control" asp-for="@Model.MoviesModel.LentTo" type="text" />
+            <span class="text-danger" asp-validation-for="@Model.MoviesModel.LentTo"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.MoviesModel.Notes">Notes:</label>
+            <input class="form-control" asp-for="@Model.MoviesModel.Notes" type="text" />
+            <span class="text-danger" asp-validation-for="@Model.MoviesModel.Notes"></span>
+        </div>
+
+        <button class="btn btn-primary" type="submit">Save</button>
+
+        <button class="btn btn-primary" asp-action="Movie">Cancel</button>
+    </form>
+    
+</div>

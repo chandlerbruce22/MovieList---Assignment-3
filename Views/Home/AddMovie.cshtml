@@ -8,29 +8,29 @@
 
 @model MovieList.Models.AddMovie
 
-<div>
+<div class="container">
     <form asp-action="AddMovie" method="post">
-        <div>
+        <div class="form-group">
             <label asp-for="Category">Category:</label>
-            <input asp-for="Category" />
+            <input asp-for="Category" class="form-control" />
         </div>
 
-        <div>
-            <label asp-for="MovieTitle">Movie Title:</label>
-            <input asp-for="MovieTitle" />
+        <div class="form-group">
+            <label asp-for="MovieTitle">Title:</label>
+            <input asp-for="MovieTitle" class="form-control" />
         </div>
 
-        <div>
+        <div class="form-group">
             <label asp-for="Year">Year:</label>
-            <input asp-for="Year" />
+            <input asp-for="Year" class="form-control" />
         </div>
 
-        <div>
+        <div class="form-group">
             <label asp-for="Director">Director:</label>
-            <input asp-for="Director" />
+            <input asp-for="Director" class="form-control" />
         </div>
 
-        <div>
+        <div class="form-group">
             <label asp-for="Rating">Rating:</label>
             <select asp-for="Rating">
                 <option value="">Select One</option>
@@ -41,7 +41,7 @@
             </select>
         </div>
 
-        <div>
+        <div class="form-group">
             <label asp-for="Edited">Edited:</label>
             <select asp-for="Edited">
                 <option value="">Select One</option>
@@ -50,18 +50,19 @@
             </select>
         </div>
 
-        <div>
+        <div class="form-group">
             <label asp-for="LentTo">Lent To:</label>
-            <input asp-for="LentTo" />
+            <input asp-for="LentTo" class="form-control" />
         </div>
 
-        <div>
+        <div class="form-group">
             <label asp-for="Notes">Notes:</label>
-            <input asp-for="Notes" />
+            <input asp-for="Notes" class="form-control" />
         </div>
 
         <div asp-validation-summary="All"></div>
 
-        <button type="submit">Submit Your Application!</button>
+        <button type="submit" class="btn btn-primary">Add</button>
+        <button class="btn btn-primary" asp-action="Movie">Cancel</button>
     </form>
 </div>

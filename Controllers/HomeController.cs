@@ -13,9 +13,18 @@ namespace MovieList.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private MovieListContext _context;
+
+        private IMoviesRepository _repository;
+
+        public static int tempID; 
+
+
+        public HomeController(ILogger<HomeController> logger, MovieListContext context, IMoviesRepository repository)
         {
             _logger = logger;
+            _context = context;
+            _repository = repository;
         }
 
         public IActionResult Index()
@@ -30,7 +39,7 @@ namespace MovieList.Controllers
 
         public IActionResult Movie()
         {
-            return View(TempStorage.Applications);
+            return View(_context.Movies);
         }
 
         [HttpGet]
@@ -40,19 +49,60 @@ namespace MovieList.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddMovie(AddMovie appResponse)
+        public IActionResult AddMovie(AddMovie movie)
         {
-            TempStorage.AddApplication(appResponse);
-
             if (ModelState.IsValid)
             {
-                return View("Confirmation", appResponse);
+                _context.Movies.Add(movie);
+                _context.SaveChanges();
+                return View("Movie", _context.Movies);
             }
             else
             {
-                return View();
+                return View("Movie", _context.Movies);
             }
+        }
 
+        [HttpPost]
+        public IActionResult EditMovies(int id)
+        {
+            tempID = id;
+            return View("EditMovie", new MoviesViewModel
+            {
+                MoviesModel = _context.Movies.Single(x => x.MovieID == tempID),
+                ID = tempID
+            });
+        }
+
+        public IActionResult UpdateMovies(MoviesViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var movie = _context.Movies.Single(x => x.MovieID == tempID);
+                //Can't use shorter method to do in one line, because ID is not being changed
+                _context.Entry(movie).Property(x => x.Category).CurrentValue = model.MoviesModel.Category;
+                _context.Entry(movie).Property(x => x.MovieTitle).CurrentValue = model.MoviesModel.MovieTitle;
+                _context.Entry(movie).Property(x => x.Year).CurrentValue = model.MoviesModel.Year;
+                _context.Entry(movie).Property(x => x.Director).CurrentValue = model.MoviesModel.Director;
+                _context.Entry(movie).Property(x => x.Rating).CurrentValue = model.MoviesModel.Rating;
+                _context.Entry(movie).Property(x => x.Edited).CurrentValue = model.MoviesModel.Edited;
+                _context.Entry(movie).Property(x => x.LentTo).CurrentValue = model.MoviesModel.LentTo;
+                _context.Entry(movie).Property(x => x.Notes).CurrentValue = model.MoviesModel.Notes;
+                _context.SaveChanges();
+                return RedirectToAction("Movie");
+            }
+            else
+            {
+                return View("Movie", _context.Movies);
+            }
+        }
+        
+
+        public IActionResult DeleteMovies(int id)
+        {
+            _context.Remove(_context.Movies.Single(x => x.MovieID == id));
+            _context.SaveChanges();
+            return RedirectToAction("Movie");
         }
 
         public IActionResult Privacy()

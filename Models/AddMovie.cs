@@ -10,6 +10,8 @@ namespace MovieList.Models
 {
     public class AddMovie
     {
+        [Key]
+        public int MovieID { get; set; }
         [Required]
         public string Category { get; set; }
         [Required]
